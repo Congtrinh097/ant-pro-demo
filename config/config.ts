@@ -89,9 +89,16 @@ export default {
       authority: ['admin', 'user'],
       routes: [
         {
-          name: 'analysis',
+          name: 'Dashboard',
+          icon: 'windows',
           path: '/dashboard/analysis',
           component: './dashboard/analysis',
+        },
+        {
+          name: 'Categories',
+          icon: 'unordered-list',
+          path: '/list/table-list',
+          component: './list/table-list',
         },
         {
           path: '/',
