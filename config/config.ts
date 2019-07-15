@@ -106,6 +106,10 @@ export default {
           icon: 'smile',
           component: './Welcome',
         },
+        { 
+          path: '/403',
+          component: './exception/403',
+        },
         {
           component: './404',
         },
@@ -113,6 +117,9 @@ export default {
     },
     {
       component: './404',
+    },
+    {
+      component: './exception/403',
     },
   ],
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
