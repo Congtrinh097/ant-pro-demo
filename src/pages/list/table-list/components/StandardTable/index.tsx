@@ -122,7 +122,7 @@ class StandardTable extends Component<StandardTableProps<TableListItem>, Standar
     return (
       <div className={styles.standardTable}>
         <div className={styles.tableAlert}>
-          <Alert
+          {/* <Alert
             message={
               <Fragment>
                 已选择 <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> 项&nbsp;&nbsp;
@@ -144,10 +144,10 @@ class StandardTable extends Component<StandardTableProps<TableListItem>, Standar
             }
             type="info"
             showIcon
-          />
+          /> */}
         </div>
         <Table
-          rowKey={rowKey || 'key'}
+          rowKey={rowKey || 'id'}
           rowSelection={rowSelection}
           dataSource={list}
           pagination={paginationProps}

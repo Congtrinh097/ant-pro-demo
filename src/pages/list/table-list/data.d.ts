@@ -32,3 +32,22 @@ export interface TableListParams {
   pageSize: number;
   currentPage: number;
 }
+
+
+export interface CategoryItem {
+  id: number;
+  href: string;
+  image: string;
+  title: string;
+  desc: string;
+  callNo: number;
+  status: number;
+  parent: number;
+  updatedAt: Date;
+  createdAt: Date;
+}
+
+export interface TableListCategories {
+  list: CategoryItem[];
+  pagination: Partial<TableListPagination>;
+}

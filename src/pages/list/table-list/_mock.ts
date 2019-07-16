@@ -155,8 +155,91 @@ function postRule(
 
   return res.json(result);
 }
+const getCategories =
+ {
+    list: [
+      {
+        id: 1,
+        href: 'string',
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE769C--W4PHkPXXrLynU43TteQETds1pvY4hMPMB_Xa0Ta3e6',
+        title: 'Title of Categories',
+        desc: 'Description of categories',
+        callNo: 1002,
+        status: 0,
+        parent: 0,
+        updatedAt: Date.now(),
+        createdAt: Date.now(),
+      },
+      {
+        id: 2,
+        href: 'string',
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE769C--W4PHkPXXrLynU43TteQETds1pvY4hMPMB_Xa0Ta3e6',
+        title: 'Title of Categories',
+        desc: 'Description of categories',
+        callNo: 1002,
+        status: 1,
+        parent: 1,
+        updatedAt: Date.now(),
+        createdAt: Date.now(),
+      },
+      {
+        id: 5,
+        href: 'string',
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE769C--W4PHkPXXrLynU43TteQETds1pvY4hMPMB_Xa0Ta3e6',
+        title: 'Title of Categories',
+        desc: 'Description of categories',
+        callNo: 1002,
+        status: 1,
+        parent: 1,
+        updatedAt: Date.now(),
+        createdAt: Date.now(),
+      },
+      {
+        id: 2,
+        href: 'string',
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE769C--W4PHkPXXrLynU43TteQETds1pvY4hMPMB_Xa0Ta3e6',
+        title: 'Title of Categories',
+        desc: 'Description of categories',
+        callNo: 1002,
+        status: 1,
+        parent: 1,
+        updatedAt: Date.now(),
+        createdAt: Date.now(),
+      },
+      {
+        id: 3,
+        href: 'string',
+        image: './avatar.jpg',
+        title: 'Title of Categories',
+        desc: 'Description of categories',
+        callNo: 1002,
+        status: 1,
+        parent: 1,
+        updatedAt: Date.now(),
+        createdAt: Date.now(),
+      },
+      {
+        id: 4,
+        href: 'string',
+        image: './avatar.jpg',
+        title: 'Title of Categories',
+        desc: 'Description of categories',
+        callNo: 1002,
+        status: 1,
+        parent: 1,
+        updatedAt: Date.now(),
+        createdAt: Date.now(),
+      },
+    ],
+    pagination: {
+      total: 100,
+      pageSize: 5,
+      current: 1
+    }
+  };
 
 export default {
   'GET /api/rule': getRule,
   'POST /api/rule': postRule,
+  'GET /api/get-categories': getCategories
 };

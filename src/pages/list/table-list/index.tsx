@@ -14,6 +14,7 @@ import {
   Row,
   Select,
   message,
+  Avatar 
 } from 'antd';
 import React, { Component, Fragment } from 'react';
 
@@ -40,7 +41,7 @@ const getValue = (obj: { [x: string]: string[] }) =>
 
 type IStatusMapType = 'default' | 'processing' | 'success' | 'error';
 const statusMap = ['default', 'processing', 'success', 'error'];
-const status = ['关闭', '运行中', '已上线', '异常'];
+const status = ['Deactive', 'Active'];
 
 interface TableListProps extends FormComponentProps {
   dispatch: Dispatch<any>;
@@ -86,8 +87,8 @@ class TableList extends Component<TableListProps, TableListState> {
 
   columns: StandardTableColumnProps[] = [
     {
-      title: 'Name',
-      dataIndex: 'name',
+      title: 'Title',
+      dataIndex: 'title',
     },
     {
       title: 'Description',
@@ -98,7 +99,7 @@ class TableList extends Component<TableListProps, TableListState> {
       dataIndex: 'callNo',
       sorter: true,
       align: 'right',
-      render: (val: string) => `${val} 万`,
+      render: (val: string) => `${val}`,
       // mark to display a total number
       needTotal: true,
     },
@@ -134,7 +135,13 @@ class TableList extends Component<TableListProps, TableListState> {
       render: (val: string) => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
     },
     {
-      title: 'Active',
+      title: 'Image',
+      dataIndex: 'image',
+      sorter: true,
+      render: (val: string) => <Avatar shape="square" size="large" src={val} />
+    },
+    {
+      title: 'Action',
       render: (text, record) => (
         <Fragment>
           <a onClick={() => this.handleUpdateModalVisible(true, record)}>Edit</a>
@@ -191,13 +198,6 @@ class TableList extends Component<TableListProps, TableListState> {
     dispatch({
       type: 'listTableList/fetch',
       payload: {},
-    });
-  };
-
-  toggleForm = () => {
-    const { expandForm } = this.state;
-    this.setState({
-      expandForm: !expandForm,
     });
   };
 
@@ -302,32 +302,23 @@ class TableList extends Component<TableListProps, TableListState> {
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
-          <Col md={8} sm={24}>
-            <FormItem label="Name">
-              {getFieldDecorator('name')(<Input placeholder="Name" />)}
+          <Col md={8} sm={0}>
+          </Col>
+          <Col md={10} sm={24}>
+            <FormItem >
+              {getFieldDecorator('name')(<Input placeholder="Input text for search..." />)}
             </FormItem>
           </Col>
-          <Col md={8} sm={24}>
-            <FormItem label="Status">
-              {getFieldDecorator('status')(
-                <Select placeholder="Please Select" style={{ width: '100%' }}>
-                  <Option value="0">Deactive</Option>
-                  <Option value="1">Active</Option>
-                </Select>,
-              )}
-            </FormItem>
-          </Col>
-          <Col md={8} sm={24}>
+          <Col md={6} sm={24}>
             <span className={styles.submitButtons}>
               <Button type="primary" htmlType="submit">
-                Search
+               <Icon type="search" />
+                Search 
               </Button>
               <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>
+                <Icon type="reload" />
                 Reset
               </Button>
-              <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
-                Toggle <Icon type="down" />
-              </a>
             </span>
           </Col>
         </Row>
@@ -335,83 +326,9 @@ class TableList extends Component<TableListProps, TableListState> {
     );
   }
 
-  renderAdvancedForm() {
-    const {
-      form: { getFieldDecorator },
-    } = this.props;
-    return (
-      <Form onSubmit={this.handleSearch} layout="inline">
-        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
-          <Col md={8} sm={24}>
-            <FormItem label="Name">
-              {getFieldDecorator('name')(<Input placeholder="Name" />)}
-            </FormItem>
-          </Col>
-          <Col md={8} sm={24}>
-            <FormItem label="Status">
-              {getFieldDecorator('status')(
-                <Select placeholder="Select Status" style={{ width: '100%' }}>
-                  <Option value="0">Deactive</Option>
-                  <Option value="1">Active</Option>
-                </Select>,
-              )}
-            </FormItem>
-          </Col>
-          <Col md={8} sm={24}>
-            <FormItem label="Number">
-              {getFieldDecorator('number')(<InputNumber style={{ width: '100%' }} />)}
-            </FormItem>
-          </Col>
-        </Row>
-        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
-          <Col md={8} sm={24}>
-            <FormItem label="Date">
-              {getFieldDecorator('date')(
-                <DatePicker style={{ width: '100%' }} placeholder="Select the date" />,
-              )}
-            </FormItem>
-          </Col>
-          <Col md={8} sm={24}>
-            <FormItem label="Status">
-              {getFieldDecorator('status3')(
-                <Select placeholder="Status" style={{ width: '100%' }}>
-                  <Option value="0">Deactive</Option>
-                  <Option value="1">Active</Option>
-                </Select>,
-              )}
-            </FormItem>
-          </Col>
-          <Col md={8} sm={24}>
-            <FormItem label="Status 4">
-              {getFieldDecorator('status4')(
-                <Select placeholder="Select Status 4" style={{ width: '100%' }}>
-                  <Option value="0">Deactive</Option>
-                  <Option value="1">Active</Option>
-                </Select>,
-              )}
-            </FormItem>
-          </Col>
-        </Row>
-        <div style={{ overflow: 'hidden' }}>
-          <div style={{ float: 'right', marginBottom: 24 }}>
-            <Button type="primary" htmlType="submit">
-              Search
-            </Button>
-            <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>
-              Reset
-            </Button>
-            <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
-              Toggle <Icon type="up" />
-            </a>
-          </div>
-        </div>
-      </Form>
-    );
-  }
-
   renderForm() {
     const { expandForm } = this.state;
-    return expandForm ? this.renderAdvancedForm() : this.renderSimpleForm();
+    return this.renderSimpleForm();
   }
 
   render() {
@@ -447,10 +364,10 @@ class TableList extends Component<TableListProps, TableListState> {
               </Button>
               {selectedRows.length > 0 && (
                 <span>
-                  <Button>批量操作</Button>
+                  <Button type="primary">Delete</Button>
                   <Dropdown overlay={menu}>
                     <Button>
-                      更多操作 <Icon type="down" />
+                      Option<Icon type="down" />
                     </Button>
                   </Dropdown>
                 </span>

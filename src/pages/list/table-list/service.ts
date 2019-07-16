@@ -36,3 +36,9 @@ export async function updateRule(params: TableListParams) {
     },
   });
 }
+
+export async function getCategories(params: TableListParams) {
+  return request('/api/get-categories', {
+    params,
+  });
+}
