@@ -84,43 +84,56 @@ export default {
   routes: [
     {
       path: '/',
-      component: '../layouts/BasicLayout',
-      Routes: ['src/pages/Authorized'],
-      authority: ['admin', 'user'],
+      component: '../layouts/BlankLayout',
       routes: [
         {
-          name: 'Dashboard',
-          icon: 'windows',
-          path: '/dashboard/analysis',
-          component: './dashboard/analysis',
-        },
-        {
-          name: 'Categories',
-          icon: 'unordered-list',
-          path: '/list/table-list',
-          component: './list/table-list',
+          path: '/user',
+          component: '../layouts/UserLayout',
+          routes: [
+            {
+              path: '/user',
+              redirect: '/user/login',
+            },
+            {
+              name: 'login',
+              path: '/user/login',
+              component: './user/login',
+            },
+            {
+              component: '404',
+            },
+          ],
         },
         {
           path: '/',
-          name: 'welcome',
-          icon: 'smile',
-          component: './Welcome',
-        },
-        { 
-          path: '/403',
-          component: './exception/403',
-        },
-        {
-          component: './404',
+          component: '../layouts/BasicLayout',
+          Routes: ['src/pages/Authorized'],
+          authority: ['admin', 'user'],
+          routes: [
+            {
+              name: 'Dashboard',
+              icon: 'windows',
+              path: '/dashboard/analysis',
+              authority: ['admin'],
+              component: './dashboard/analysis',
+            },
+            {
+              name: 'Categories',
+              icon: 'unordered-list',
+              path: '/list/table-list',
+              authority: ['admin'],
+              component: './list/table-list',
+            },
+            {
+              path: '/',
+              name: 'welcome',
+              icon: 'smile',
+              component: './Welcome',
+            },
+          ],
         },
       ],
-    },
-    {
-      component: './404',
-    },
-    {
-      component: './exception/403',
-    },
+    }
   ],
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: {
